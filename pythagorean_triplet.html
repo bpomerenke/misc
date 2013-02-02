@@ -1,0 +1,14 @@
+<script>
+	
+	for(var first=1; first<1000; first++)
+	{
+		for(var second=first; second<1000; second++)
+		{
+			var sumOfSquares = first * first + second * second;
+			var third = Math.floor(Math.sqrt(sumOfSquares));
+			
+			if( third * third == sumOfSquares && first + second + third == 1000)
+				document.write("["+first+","+second+","+third+"]");
+		}
+	}
+</script>
