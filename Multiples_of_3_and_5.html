@@ -1,0 +1,15 @@
+<script>
+	var sum = 0;
+	for(var i = 1; i <= 1000; i++)
+	{
+		document.write("<em>");
+		if(i%3 == 0 || i%5 == 0)
+		{
+			sum += i;
+			document.write(i + ", ")
+		}
+		document.write("</em>");
+	}
+	
+	document.write("<h3>TOTAL: " + sum + "</h3>");
+</script>
