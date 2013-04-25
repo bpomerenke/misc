@@ -1,0 +1,61 @@
+<html>
+	<head>
+	
+	</head>
+	<body>
+		<h2>Here's the button</h2>
+		<div style="display:table;">
+		<span style="float:left;">Click button to rotate: </span>
+		<div id="image-container" style="display: block; border:1px solid black; height: 200px; width: 200px; text-align:center; vertical-align:middle; float:left;">
+			<div id="click-area" style="z-index:1000; width:200px; height:200px; background:transparent; position:absolute; display:block;">
+			</div>
+			<img src="dial.png" id="image" style="display:inline-block;" />	
+		</div>
+		</div>
+		<br/>
+		angle: <input type=text id="angle" value="-" />
+
+		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="js/jQueryRotate.js"></script>
+		<script>
+			var angle = 0;
+			var continueAnimation = false;
+			var currentX = 230;
+			var currentY = 0;
+			var width = 200;
+			$(function(){
+				function rotateItem(){
+					if(continueAnimation)
+					{
+						var normY = -currentY + width / 2;
+						var normX = currentX - (width / 2);
+				   
+						var angle = -(180 * Math.atan2(normY, normX) / Math.PI) + 90; 
+
+						$('#angle').val((angle + 360) % 360);
+						$('#image').rotate(angle);
+					}
+				}
+				
+				function startAnimation(evt) {
+					continueAnimation = true;
+				}
+				function stopAnimation(evt) {
+					continueAnimation = false;
+				}
+			
+				function updatePosition(evt) {
+				   var parentOffset = $(this).offset();
+				   currentX = evt.pageX - parentOffset.left;
+				   currentY = evt.pageY - parentOffset.top;
+				}
+				
+				$('#image-container').mousemove(updatePosition);
+				$('#click-area').mousedown(startAnimation);
+				$('#click-area').mouseup(stopAnimation);
+				$('#click-area').mouseout(stopAnimation);
+				setInterval(rotateItem, 100);
+			});
+		</script>
+	</body>
+<html>
