@@ -1,0 +1,36 @@
+<script>
+	var count = 0;
+	var palindromes = [];
+	for(var first=999; first>=100; first--)
+	{
+		for(var second=999; second>=100; second--)
+		{
+			var product = first * second;
+			var productAsString = product.toString();
+			var numDigits = productAsString.length;
+			
+			var isPalindrome = false;
+			for(var dig = 0; dig < numDigits / 2; dig++){
+				if(productAsString.charAt(dig) != productAsString.charAt(numDigits - dig - 1))
+				{
+					isPalindrome = false;
+					break;
+				}
+				isPalindrome = true;
+			}
+			
+			if(isPalindrome){
+				palindromes[count++] = { a: first, b: second, prod: product };
+			}
+		}
+	}
+	
+	palindromes.sort(function(a, b){return b.prod - a.prod; });
+	document.write("<h2>Biggest: " + palindromes[0].a + " * " + palindromes[0].b + " = " + palindromes[0].prod + "</h2>");
+	document.write("<ol>");
+	for(var i = 0; i < palindromes.length; i++){
+		var item = palindromes[i];
+		document.write("<li>" + item.a + " * " + item.b + " = " + item.prod + "</li>");
+	}
+	document.write("</ol>");
+</script>
