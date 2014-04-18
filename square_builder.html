@@ -1,0 +1,39 @@
+Number:<input type=text id="num_input"/>
+<textarea rows=15 cols=40 id="output_area"></textarea>
+<script src="jquery-1.11.0.min.js"></script>
+<script>
+    var findPadding = function(curVal, maxVal){
+		var numSpaces = maxVal.toString().length - curVal.toString().length;
+		var result = " ";
+		for(var i=0; i<numSpaces; i++){
+			result+=" ";
+		}
+		return result;
+	}
+	
+	var buildSquare = function(inputVal){
+		var sideLength = Math.ceil(Math.sqrt(inputVal));
+		var result = "";
+		
+		var counter = 1;
+		for(var i=0; i < sideLength; i++){
+			for(var j=0; j < sideLength; j++){
+				var valToPrint = "";
+				if(counter > inputVal){
+					valToPrint = "*";
+				}
+				else{
+					valToPrint = counter;
+				}
+				result += findPadding(valToPrint, inputVal) + valToPrint;
+				counter++;
+			}
+			result += "\n";
+		}
+		return result;
+	};
+	
+	$('#num_input').keyup(function(){
+		$('#output_area').text(buildSquare($(this).val()));
+	});
+</script>
